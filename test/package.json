@@ -1,0 +1,19 @@
+{
+	"name": "ts-webpack-builder-test",
+	"version": "1.0.0",
+	"description": "A tool for building TypeScript libraries and applications.",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"runner": "tsc --p run/tsconfig.json",
+		"start": "node run/runner.js",
+		"test": "tsc --p test/tsconfig.json && node test/index.js"
+	},
+	"author": "Andrew Messier",
+	"license": "UNLICENSED",
+	"dependencies": {},
+	"devDependencies": {
+		"@types/node": "^13.11.1",
+		"typescript": "^3.8.3"
+	}
+}

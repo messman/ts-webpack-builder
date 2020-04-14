@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"allowJs": false,
+		"checkJs": false,
+		"alwaysStrict": true,
+		"module": "commonjs",
+		"esModuleInterop": true,
+		"target": "es2017",
+		"skipLibCheck": true
+	},
+	"files": [
+		"./index.ts"
+	],
+	"exclude": [
+		"./dist/*"
+	]
+}
