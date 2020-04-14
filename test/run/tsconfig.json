@@ -1,11 +1,13 @@
 {
+	"extends": "../../tsconfig-base.json",
 	"compilerOptions": {
-		"allowJs": false,
-		"checkJs": false,
-		"alwaysStrict": true,
 		"module": "commonjs",
-		"esModuleInterop": true,
-		"target": "es2017",
+		"sourceMap": false,
+		"declaration": false,
+		"declarationMap": false,
+		"incremental": false
 	},
-	"compileOnSave": false
+	"files": [
+		"./runner.ts"
+	]
 }
