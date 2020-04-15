@@ -22,9 +22,11 @@ Thus, this package was born.
 - Also supports running webpack configurations for applications 
   - Uses `nodemon` to do so, so it auto-restarts the application when you rebuild.
 
-## Build & Use
+## Build
 
 Build with `npm start`. That runs the webpack build (meta, right) to create this library, then runs the `tsc` command to build the cli.
+
+## Use
 
 To use in a project, you can use `npm link`:
 - In the root of this project, run `npm link`. That basically installs this package in the npm global space for this machine.
@@ -33,6 +35,12 @@ Note, the `ts-webpack-builder` won't show up in the `package.json` dependencies.
 
 Once this tool is added to the consuming project, you can either create a script in that project to call into this tool (like a `runner.ts`) or you can use the CLI.
 See the `test` folder for more information on both. The CLI should be improved in the future to be more customizable / have better shortcuts.
+
+In your package.json:
+```json
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+```
 
 ## CLI
 
