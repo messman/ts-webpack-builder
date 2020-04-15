@@ -5,7 +5,7 @@
 	Additional benefit - don't have to specify the absoluteRoot, as it is assumed from the working directory.
 */
 
-import path from 'path';
+import * as path from 'path';
 import * as yargs from 'yargs';
 
 import { LibraryBuildOptions, buildLibrary } from '../dist/index';

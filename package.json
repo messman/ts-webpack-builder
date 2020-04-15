@@ -26,6 +26,7 @@
 		"@types/node": "^13.11.1",
 		"@types/nodemon": "^1.19.0",
 		"@types/webpack": "^4.41.11",
+		"@types/webpack-node-externals": "^1.7.1",
 		"@types/yargs": "^15.0.4",
 		"typescript": "^3.8.3",
 		"yargs": "^15.3.1"

@@ -1,5 +1,4 @@
-import nodemon from "nodemon";
-//declare function nodemon(opts: {}): any;
+import * as nodemon from "nodemon";
 
 export function runNodemon(file: string): void {
 	nodemon({
@@ -11,7 +10,7 @@ export function runNodemon(file: string): void {
 			"NODE_ENV": "development"
 		}
 	})
-		.on("log", function (event) {
+		.on("log", function (event: nodemon.LogMessage) {
 			// https://github.com/remy/nodemon/blob/master/doc/events.md
 			// Outputs the color messages from nodemon
 			console.log(event.colour);

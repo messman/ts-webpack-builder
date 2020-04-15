@@ -2,18 +2,18 @@ import * as path from 'path';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as nodeExternals from 'webpack-node-externals';
 import { LibraryBuildOptions } from './library-config';
-import webpack from 'webpack';
+import { Configuration } from "webpack";
 
 /*
 	References:
 	- Webpack itself: https://webpack.js.org/guides/author-libraries/
 	- https://medium.com/code-oil/webpack-javascript-bundling-for-both-front-end-and-back-end-b95f1b429810
 */
-export function createWebpackConfig(options: LibraryBuildOptions): webpack.Configuration {
+export function createWebpackConfig(options: LibraryBuildOptions): Configuration {
 
 	const outputPath = path.resolve(options.absoluteRoot, options.outputFolderFromRoot);
 
-	const config: webpack.Configuration = {};
+	const config: Configuration = {};
 
 	// https://webpack.js.org/configuration/mode/
 	config.mode = options.isDevelopment ? 'development' : 'production';

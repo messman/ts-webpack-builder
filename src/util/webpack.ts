@@ -1,4 +1,4 @@
-import webpack from "webpack";
+import * as webpack from "webpack";
 
 /** Runs webpack config object and returns a promise that resolves after the first build. */
 export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
@@ -7,7 +7,7 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 
 	return new Promise((resolve, reject) => {
 
-		function callback(errors, stats) {
+		function callback(error: Error, stats: webpack.Stats) {
 			// Let us know if this was the initial build or new build.
 			const wasFirst = isFirst;
 			isFirst = false;
@@ -16,7 +16,7 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 
 			// Output stats about the build.
 			try {
-				processWebpackBuild(errors, stats, wasFirst);
+				processWebpackBuild(error, stats, wasFirst);
 			}
 			catch (e) {
 				reject(e);
@@ -48,13 +48,10 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 	});
 }
 
-function processWebpackBuild(errors, stats, wasFirst: boolean): void {
+function processWebpackBuild(error: Error, stats: webpack.Stats, wasFirst: boolean): void {
 	// Show webpack errors (larger configuration issues)
-	if (errors) {
-		console.error(errors.stack || errors);
-		if (errors.details) {
-			console.error(errors.details);
-		}
+	if (error) {
+		console.error(error.stack || error);
 		throw new Error("Webpack compilation failed - major error");
 	}
 

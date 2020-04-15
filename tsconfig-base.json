@@ -1,9 +1,7 @@
 {
 	"compilerOptions": {
 		"module": "esnext",
-		"esModuleInterop": true,
-		"moduleResolution": "node",
-		"target": "es2015",
+		"target": "es2017",
 		"sourceMap": true,
 		"declaration": true,
 		"declarationMap": true,
@@ -11,15 +9,12 @@
 		"allowJs": false,
 		"checkJs": false,
 		"alwaysStrict": true,
-		"noImplicitAny": false,
-		"noImplicitReturns": false,
-		"noImplicitThis": false,
+		"strict": true,
+		"noImplicitReturns": true,
 		"noUnusedLocals": true,
-		"noUnusedParameters": false,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
 		"noEmitOnError": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"strictBindCallApply": true,
 		"preserveConstEnums": true
 	},
 	"compileOnSave": false

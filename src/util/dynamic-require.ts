@@ -8,11 +8,11 @@ import { failWith } from "./fail";
 	More information: https://github.com/webpack/webpack/issues/4175
 */
 
-declare function __webpack_require__(entityPath: string);
-declare function __non_webpack_require__(entityPath: string);
+declare function __webpack_require__(entityPath: string): {};
+declare function __non_webpack_require__(entityPath: string): {};
 const requireFunc = typeof __webpack_require__ === "function" ? __non_webpack_require__ : require;
 
-export function runtimeRequire(entityPath: string) {
+export function runtimeRequire(entityPath: string): {} {
 	let entity = {};
 	try {
 		entity = requireFunc(entityPath);

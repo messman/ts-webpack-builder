@@ -2,7 +2,7 @@ import * as path from "path";
 import * as file from "fs";
 import { ApplicationBuildOptions, parseApplicationBuildType } from "./application-config";
 import { fail, failWith } from "../util/fail";
-import webpack from "webpack";
+import { Configuration } from "webpack";
 import { runtimeRequire } from "../util/dynamic-require";
 import { runNodemon } from "./nodemon";
 import { runWebpack } from "../util/webpack";
@@ -22,7 +22,7 @@ export function buildApplication(config: ApplicationBuildOptions): void {
 		fail(`webpack configuration file is not within project root: '${webpackConfigFile}'`);
 
 	console.log(`Loading webpack config from '${webpackConfigFile}'`);
-	const webpackConfigObject: webpack.Configuration = runtimeRequire(webpackConfigFile);
+	const webpackConfigObject: Configuration = runtimeRequire(webpackConfigFile);
 
 	// Parse build type
 	const [build, watch, run] = parseApplicationBuildType(config.buildType);
