@@ -12,6 +12,8 @@ import { Configuration } from "webpack";
 export function createWebpackConfig(options: LibraryBuildOptions): Configuration {
 
 	const outputPath = path.resolve(options.absoluteRoot, options.outputFolderFromRoot);
+	// The parent of the *output* npm package dist directory.
+	const rootDir = path.resolve(__dirname, '../node_modules');
 
 	const config: Configuration = {};
 
@@ -45,25 +47,16 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 		];
 	}
 
-	if (options.isNode) {
-		config.node = {
-			// true: use source location, false: use webpack output location
-			// https://webpack.js.org/configuration/node/#node-__filename
-			__dirname: true,
-			__filename: true
-		}
-	}
-
 	// https://webpack.js.org/configuration/resolve/
 	config.resolve = {
-		// Makes things work with npm link.
-		// https://webpack.js.org/configuration/resolve/#resolvesymlinks
-		// https://stackoverflow.com/questions/37769228/npm-link-with-webpack-cannot-find-module
-		symlinks: false,
-
 		extensions: ['.ts', '.js', '.json']
-	}
+	};
 
+	// help webpack find the `ts-loader` that is part of this project
+	// https://webpack.js.org/configuration/resolve/#resolveloader
+	config.resolveLoader = {
+		modules: ['node_modules', rootDir]
+	};
 
 	// https://webpack.js.org/configuration/module/
 

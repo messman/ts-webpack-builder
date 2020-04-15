@@ -21,8 +21,8 @@ module.exports = {
 		nodeExternals()
 	],
 	node: {
-		__dirname: true,
-		__filename: true
+		__dirname: false,
+		__filename: false
 	},
 
 	resolve: {
