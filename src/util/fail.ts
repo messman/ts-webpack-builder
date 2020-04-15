@@ -1,9 +1,11 @@
+import { logError } from "./log";
+
 export function fail(errMessage: string): void {
 	failWith(new Error(errMessage));
 }
 
 export function failWith(err: Error): void {
-	console.error("\n>>>>> Build/Run Failed <<<<<");
-	console.error(err);
+	logError(">>>>> Build/Run Failed <<<<<");
+	logError(err);
 	process.exit(1);
 }

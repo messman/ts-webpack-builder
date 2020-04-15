@@ -1,4 +1,5 @@
 import { fail } from "./util/fail";
+import { log } from "./util/log";
 
 /** Shared options between Library and Application builds. */
 export interface BaseBuildOptions {
@@ -25,10 +26,10 @@ export function findConfig<T extends BaseBuildOptions>(configName: string, allCo
 	const config = allConfigs[configName];
 
 	if (config) {
-		console.log(`Using config '${configName}'`);
+		log(`Using config '${configName}'`);
 	}
 	else {
-		console.log(`Config name '${configName}' has no config object associated with it.`);
+		log(`Config name '${configName}' has no config object associated with it.`);
 		const keys = Object.keys(allConfigs);
 		console.log(`Valid configurations are (${keys.length}):`);
 		keys.forEach((key) => {

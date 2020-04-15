@@ -40,13 +40,17 @@ export interface LibraryBuildOptions extends BaseBuildOptions {
 	 * Default: 'index'
 	 */
 	libraryName: string,
-
 	/**
 	 * If truthy, uses Babel to transpile down to es6/es2015.
 	 * Should not need to be set for node libraries.
 	 * Default: null
 	 */
-	babelConfig: {} | null
+	babelConfig: {} | null,
+	/**
+	 * If true, logs extra information about this build.
+	 * Default: false
+	 */
+	isDebug: boolean
 }
 
 export const defaultLibraryBuildOptions: LibraryBuildOptions = {
@@ -58,5 +62,6 @@ export const defaultLibraryBuildOptions: LibraryBuildOptions = {
 	outputFolderFromRoot: './dist/',
 	outputFileName: 'index.js',
 	libraryName: undefined!,
-	babelConfig: null
+	babelConfig: null,
+	isDebug: false
 }

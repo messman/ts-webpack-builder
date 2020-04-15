@@ -1,4 +1,5 @@
 import * as webpack from "webpack";
+import { logError, log, logLine } from "./log";
 
 /** Runs webpack config object and returns a promise that resolves after the first build. */
 export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
@@ -11,8 +12,9 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 			// Let us know if this was the initial build or new build.
 			const wasFirst = isFirst;
 			isFirst = false;
-			let outputText = wasFirst ? "\nInitial webpack build complete" : "\nWebpack rebuild complete";
-			console.log(outputText);
+			logLine();
+			let outputText = wasFirst ? "Initial webpack build complete" : "Webpack rebuild complete";
+			log(outputText);
 
 			// Output stats about the build.
 			try {
@@ -23,10 +25,11 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 				return;
 			}
 
+			logLine();
 			if (watch)
-				console.log("\nWebpack is watching for changes...\n");
+				log("Webpack is watching for changes...");
 			else
-				console.log("\nDone with webpack.\n");
+				log("Done with webpack.");
 
 			if (wasFirst) {
 				// Fulfill promise on first build, though we may keep going.
@@ -51,7 +54,7 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 function processWebpackBuild(error: Error, stats: webpack.Stats, wasFirst: boolean): void {
 	// Show webpack errors (larger configuration issues)
 	if (error) {
-		console.error(error.stack || error);
+		logError(error.stack || error);
 		throw new Error("Webpack compilation failed - major error");
 	}
 

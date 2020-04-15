@@ -45,8 +45,10 @@ function parseArgs(): ParsedBuildOptions {
 		.option('babelConfigPath', {
 			type: 'string',
 		})
+		.option('isDebug', {
+			type: 'boolean',
+		})
 		.strict()
-		.example('$0 blah', 'test')
 		.argv as ParsedBuildOptions;
 }
 

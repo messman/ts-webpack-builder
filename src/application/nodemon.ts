@@ -1,4 +1,5 @@
 import * as nodemon from "nodemon";
+import { log } from "../util/log";
 
 export function runNodemon(file: string): void {
 	nodemon({
@@ -16,7 +17,7 @@ export function runNodemon(file: string): void {
 			console.log(event.colour);
 		})
 		.on('quit', function () {
-			console.log('nodemon has quit');
+			log('nodemon has quit');
 			process.exit();
 		})
 		.on('restart', function () {

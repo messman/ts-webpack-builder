@@ -6,10 +6,13 @@ import { Configuration } from "webpack";
 import { runtimeRequire } from "../util/dynamic-require";
 import { runNodemon } from "./nodemon";
 import { runWebpack } from "../util/webpack";
+import { log, logVersion, logLine } from "../util/log";
 
 export function buildApplication(config: ApplicationBuildOptions): void {
 
-	console.log('Starting new application build');
+	logVersion();
+	log('Starting new application build');
+	logLine(2);
 
 	// Use the root and the webpack config from root to get the webpack config.
 	const webpackConfigFile = path.join(config.absoluteRoot, config.webpackConfigFileFromRoot);
@@ -21,7 +24,7 @@ export function buildApplication(config: ApplicationBuildOptions): void {
 	if (webpackConfigFile.indexOf(config.absoluteRoot) === -1)
 		fail(`webpack configuration file is not within project root: '${webpackConfigFile}'`);
 
-	console.log(`Loading webpack config from '${webpackConfigFile}'`);
+	log(`Loading webpack config from '${webpackConfigFile}'`);
 	const webpackConfigObject: Configuration = runtimeRequire(webpackConfigFile);
 
 	// Parse build type
