@@ -4,8 +4,13 @@
 	"description": "A tool for building TypeScript libraries and applications.",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
+	"bin": {
+		"ts-webpack-builder": "cli/cli.js"
+	},
 	"scripts": {
-		"start": "webpack"
+		"build": "webpack",
+		"build:cli": "tsc --p cli/tsconfig.json",
+		"start": "webpack && tsc --p cli/tsconfig.json"
 	},
 	"author": "Andrew Messier",
 	"license": "UNLICENSED",
@@ -21,6 +26,8 @@
 		"@types/node": "^13.11.1",
 		"@types/nodemon": "^1.19.0",
 		"@types/webpack": "^4.41.11",
-		"typescript": "^3.8.3"
+		"@types/yargs": "^15.0.4",
+		"typescript": "^3.8.3",
+		"yargs": "^15.3.1"
 	}
 }

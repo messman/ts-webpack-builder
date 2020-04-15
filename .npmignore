@@ -1,5 +1,6 @@
 src
-cli/cli.ts
+cli
+!cli/cli.js
 webpack.config.js
 tsconfig.json
 .gitignore

@@ -7,6 +7,7 @@
 	"scripts": {
 		"runner": "tsc --p run/tsconfig.json",
 		"start": "node run/runner.js",
+		"start-cli": "ts-webpack-builder",
 		"test": "tsc --p test/tsconfig.json && node test/index.js"
 	},
 	"author": "Andrew Messier",
