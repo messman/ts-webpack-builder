@@ -26,7 +26,12 @@ if (configName) {
 		'build:watch': {
 			...Builder.createNodeLibraryConfig(root, 'tsWebpackBuilderTest'),
 			watch: true
-		}
+		},
+		// Test building a client library.
+		'build:client': {
+			...Builder.createClientLibraryConfig(root, 'tsWebpackBuilderTest'),
+			babelConfig: null
+		},
 	});
 	Builder.buildLibrary(config);
 }
