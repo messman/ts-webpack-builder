@@ -42,7 +42,7 @@ When installed in the consuming project, the CLI is accessible at `./node_module
 
 ```json
 {
-	...
+	// ...
 	"scripts": {
 		"start-cli": "ts-webpack-builder",
 	},
