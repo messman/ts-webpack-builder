@@ -69,7 +69,7 @@ function processWebpackBuild(error: Error, stats: webpack.Stats, wasFirst: boole
 		chunkModules: false,
 		chunkOrigins: false,
 		errors: true,
-		errorDetails: false,
+		errorDetails: true,
 		hash: true,
 		modules: false,
 		performance: true,
@@ -80,6 +80,7 @@ function processWebpackBuild(error: Error, stats: webpack.Stats, wasFirst: boole
 	}));
 
 	const failFirstBuild = wasFirst && stats.hasErrors();
-	if (failFirstBuild)
+	if (failFirstBuild) {
 		throw new Error("Webpack compilation failed - first-time errors");
+	}
 }

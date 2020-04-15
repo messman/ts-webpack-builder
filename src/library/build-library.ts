@@ -18,6 +18,8 @@ export function buildLibrary(config: Partial<LibraryBuildOptions>): void {
 
 	const webpackConfig = createWebpackConfig(fullConfig);
 
+	logDebug(fullConfig.isDebug, 'webpack config:', webpackConfig);
+
 	runWebpack(webpackConfig, fullConfig.watch)
 		.catch((e) => {
 			failWith(e);

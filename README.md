@@ -68,7 +68,7 @@ Typical steps are:
 - `cd test` to go into the test.
 - Run the tests (see the `test` README)
 
-There are some times where you may need to call `npm unlink ts-webpack-builder` in test, then re-link, but that may have just been because I did something wrong.
+There are some times where you may need to delete the `ts-webpack-builder` folder in `node_modules` in `test`, then re-link, but that may have just been because I did something wrong.
 
 This project uses a common `tsconfig.json`. 
 

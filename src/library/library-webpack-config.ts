@@ -56,6 +56,11 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 
 	// https://webpack.js.org/configuration/resolve/
 	config.resolve = {
+		// Makes things work with npm link.
+		// https://webpack.js.org/configuration/resolve/#resolvesymlinks
+		// https://stackoverflow.com/questions/37769228/npm-link-with-webpack-cannot-find-module
+		symlinks: false,
+
 		extensions: ['.ts', '.js', '.json']
 	}
 
