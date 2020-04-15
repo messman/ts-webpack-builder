@@ -42,10 +42,9 @@ When installed in the consuming project, the CLI is accessible at `./node_module
 
 ```json
 {
-	// ...
-	"scripts": {
-		"start-cli": "ts-webpack-builder",
-	},
+  "scripts": {
+    "start-cli": "ts-webpack-builder",
+  },
 }
 ```
 You can pass in any arguments there as well.
