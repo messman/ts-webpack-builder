@@ -40,7 +40,7 @@ To run the test, which should just print to console.
 
 Note:
 - `package.json` dependencies are few - only the things really needed.
-- You have the `runner` fodler, but it's optional. You could just use the CLI.
+- You have the `runner` folder, but it's optional. You could just use the CLI.
 - No need for a webpack config that is copied from somewhere else.
 - Do still need the tsconfig.json, unfortunately.
 - Automatically cleans the `dist` folder.

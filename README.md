@@ -4,7 +4,7 @@ An npm package used to build other npm packages or applications that use TypeScr
 
 ## Why?
 
-Why use webpack to create libraries? You could just use a `tsonfig.json` file and be done with it. But the problems with that include:
+Why use webpack to create libraries? You could just use a `tsconfig.json` file and be done with it. But the problems with that include:
 - You can't have a single output JS file unless you are using `AMD` or `System` as the `module` property. Webpack allows us to create a single JS output (although we can't have a single output TypeScript declaration file - more on that below).
 - You don't get optimization, tree-shaking, etc.
 - You can't run other plugins, like `babel`.
