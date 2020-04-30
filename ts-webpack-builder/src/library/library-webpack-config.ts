@@ -15,6 +15,8 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 	// The parent of the *output* npm package dist directory.
 	const rootDir = path.resolve(__dirname, '../node_modules');
 
+	const isForDebug = options.isDevelopment && options.isDevelopmentForDebug;
+
 	const config: Configuration = {};
 
 	// https://webpack.js.org/configuration/mode/
@@ -33,7 +35,21 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 		filename: options.outputFileName,
 
 		//https://webpack.js.org/configuration/output/#module-definition-systems
-		libraryTarget: 'umd'
+		libraryTarget: 'umd',
+	};
+
+	// https://github.com/TypeStrong/ts-loader#devtool--sourcemaps
+	if (isForDebug) {
+		config.devtool = 'source-map';
+
+		// // We want the source-mapped output to map back to the original source files, not to the 'webpack:///' namespace.
+		// // https://github.com/facebook/create-react-app/blob/e89f153224cabd67efb0175103244e0b7f702767/packages/react-scripts/config/webpack.config.js
+		// // https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin- (search for "devtoolModuleFilenameTemplate")
+		// // https://stackoverflow.com/questions/34185748/how-to-make-webpack-sourcemap-to-original-files
+		// config.output.devtoolModuleFilenameTemplate = function (info) {
+		// 	return path.resolve(info.absoluteResourcePath).replace(/\\/g, '/');
+		// 	//return "file:///" + encodeURI(info.absoluteResourcePath);
+		// }
 	}
 
 	if (options.libraryName) {

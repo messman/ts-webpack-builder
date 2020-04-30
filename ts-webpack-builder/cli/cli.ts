@@ -48,6 +48,9 @@ function parseArgs(): ParsedBuildOptions {
 		.option('isDebug', {
 			type: 'boolean',
 		})
+		.option('isDevelopmentForDebug', {
+			type: 'boolean',
+		})
 		.strict()
 		.argv as ParsedBuildOptions;
 }

@@ -42,6 +42,12 @@ In your package.json:
   "types": "dist/index.d.ts",
 ```
 
+projects that consume the output of your consuming project may need their `tsconfig.json` changed to
+```json
+  "moduleResolution": "Node"
+```
+In order to resolve packages in the `node_modules` directory when using module imports.
+
 ## CLI
 
 The CLI exists in the `cli` folder. It is built separately from the rest of the code in `src` and is actually bound to the built code in `dist` folder (so that it only uses the types and doesn't try to transpile anything in `src` - that's also why it doesn't get put into `dist` after transpilation).

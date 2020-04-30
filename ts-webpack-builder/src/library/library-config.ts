@@ -47,10 +47,16 @@ export interface LibraryBuildOptions extends BaseBuildOptions {
 	 */
 	babelConfig: {} | null,
 	/**
-	 * If true, logs extra information about this build.
+	 * If true, logs extra information about this build with this tool.
 	 * Default: false
 	 */
-	isDebug: boolean
+	isDebug: boolean,
+	/**
+	 * If true, uses more expensive source-mapping to create a full debug version of the code back to its TypeScript source.
+	 * Only used when in development mode.
+	 * Default: false
+	 */
+	isDevelopmentForDebug: boolean
 }
 
 export const defaultLibraryBuildOptions: LibraryBuildOptions = {
@@ -63,5 +69,6 @@ export const defaultLibraryBuildOptions: LibraryBuildOptions = {
 	outputFileName: 'index.js',
 	libraryName: undefined!,
 	babelConfig: null,
-	isDebug: false
+	isDebug: false,
+	isDevelopmentForDebug: false
 }
