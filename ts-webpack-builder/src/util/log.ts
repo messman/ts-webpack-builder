@@ -1,11 +1,10 @@
 const packageJson = require('../../package.json');
 
-const name = packageJson['name'];
-const prefix = `[${name}] `;
+const prefix = `[tswb] `;
 
 export function logVersion(): void {
 	const version = packageJson['version'];
-	log(`v${version}`);
+	log(`ts-webpack-builder v${version}`);
 }
 
 export function logLine(lines?: number) {

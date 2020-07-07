@@ -62,6 +62,9 @@ function processWebpackBuild(error: Error, stats: webpack.Stats, wasFirst: boole
 	// https://webpack.js.org/configuration/stats/
 	console.log(stats.toString({
 		assets: true,
+		excludeAssets: (assetName) => {
+			return assetName.endsWith('.d.ts') || assetName.endsWith('.d.ts.map');
+		},
 		builtAt: true,
 		cached: false,
 		chunks: false,
@@ -70,7 +73,7 @@ function processWebpackBuild(error: Error, stats: webpack.Stats, wasFirst: boole
 		chunkOrigins: false,
 		errors: true,
 		errorDetails: true,
-		hash: true,
+		hash: false,
 		modules: false,
 		performance: true,
 		reasons: true,

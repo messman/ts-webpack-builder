@@ -36,6 +36,11 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 
 		//https://webpack.js.org/configuration/output/#module-definition-systems
 		libraryTarget: 'umd',
+
+		// When building for 'web', consuming projects would throw a 'window is not defined' error.
+		// https://github.com/webpack/webpack/issues/6522
+		// https://webpack.js.org/configuration/output/#outputglobalobject
+		globalObject: 'this',
 	};
 
 	// https://github.com/TypeStrong/ts-loader#devtool--sourcemaps
@@ -59,7 +64,9 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 	if (options.excludeNodeModules) {
 		config.externals = [
 			// Exclude node_modules from bundling
-			nodeExternals()
+			nodeExternals({
+				importType: 'umd'
+			})
 		];
 	}
 
@@ -73,6 +80,10 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 	config.resolveLoader = {
 		modules: ['node_modules', rootDir]
 	};
+
+	// config.externals = {
+	// 	luxon: 'luxon'
+	// };
 
 	// https://webpack.js.org/configuration/module/
 
@@ -101,12 +112,12 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 				use: typeScriptLoaders
 			}
 		]
-	}
+	};
 
 	config.plugins = [
 		// Clean the "dist" folder each time
 		new CleanWebpackPlugin()
-	]
+	];
 
 	return config;
 }
