@@ -1,6 +1,7 @@
 node_modules
 dist
 TODO.txt
+npm-publish.txt
 ts-webpack-builder/cli/cli.js
 test/run/*.js
 test/test/*.js
