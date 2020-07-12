@@ -1,6 +1,6 @@
 {
 	"name": "@messman/ts-webpack-builder",
-	"version": "1.4.1",
+	"version": "1.4.2",
 	"description": "A tool for building TypeScript libraries and applications.",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -37,5 +37,13 @@
 		"@types/yargs": "^15.0.4",
 		"typescript": "^3.8.3",
 		"yargs": "^15.3.1"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/messman/ts-webpack-builder.git"
+	},
+	"bugs": {
+		"url": "https://github.com/messman/ts-webpack-builder/issues"
+	},
+	"homepage": "https://github.com/messman/ts-webpack-builder#readme"
 }
