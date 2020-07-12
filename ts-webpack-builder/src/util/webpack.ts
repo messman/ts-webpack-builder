@@ -1,5 +1,5 @@
-import * as webpack from "webpack";
-import { logError, log, logLine } from "./log";
+import * as webpack from 'webpack';
+import { logError, log, logLine } from './log';
 
 /** Runs webpack config object and returns a promise that resolves after the first build. */
 export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
@@ -13,7 +13,7 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 			const wasFirst = isFirst;
 			isFirst = false;
 			logLine();
-			let outputText = wasFirst ? "Initial webpack build complete" : "Webpack rebuild complete";
+			let outputText = wasFirst ? 'Initial webpack build complete' : 'Webpack rebuild complete';
 			log(outputText);
 
 			// Output stats about the build.
@@ -27,9 +27,9 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 
 			logLine();
 			if (watch)
-				log("Webpack is watching for changes...");
+				log('Webpack is watching for changes...');
 			else
-				log("Done with webpack.");
+				log('Done with webpack.');
 
 			if (wasFirst) {
 				// Fulfill promise on first build, though we may keep going.
@@ -55,7 +55,7 @@ function processWebpackBuild(error: Error, stats: webpack.Stats, wasFirst: boole
 	// Show webpack errors (larger configuration issues)
 	if (error) {
 		logError(error.stack || error);
-		throw new Error("Webpack compilation failed - major error");
+		throw new Error('Webpack compilation failed - major error');
 	}
 
 	// Show statistics.
@@ -84,6 +84,6 @@ function processWebpackBuild(error: Error, stats: webpack.Stats, wasFirst: boole
 
 	const failFirstBuild = wasFirst && stats.hasErrors();
 	if (failFirstBuild) {
-		throw new Error("Webpack compilation failed - first-time errors");
+		throw new Error('Webpack compilation failed - first-time errors');
 	}
 }

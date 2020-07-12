@@ -1,8 +1,8 @@
-import { LibraryBuildOptions, defaultLibraryBuildOptions } from "./library-config";
-import { createWebpackConfig } from "./library-webpack-config";
-import { runWebpack } from "../util/webpack";
-import { failWith } from "../util/fail";
-import { logVersion, log, logDebug, logLine } from "../util/log";
+import { LibraryBuildOptions, defaultLibraryBuildOptions } from './library-config';
+import { createWebpackConfig } from './library-webpack-config';
+import { runWebpack } from '../util/webpack';
+import { failWith } from '../util/fail';
+import { logVersion, log, logDebug, logLine } from '../util/log';
 import * as path from 'path';
 import { runtimeRequire } from '../util/dynamic-require';
 
@@ -10,8 +10,8 @@ import { runtimeRequire } from '../util/dynamic-require';
 export function buildLibrary(config: Partial<LibraryBuildOptions>): void {
 
 	logVersion();
-	log('Starting new library build');
 	logLine();
+	log('Starting new library build');
 
 	// Fill in with defaults.
 	const fullConfig: LibraryBuildOptions = { ...defaultLibraryBuildOptions, ...config };

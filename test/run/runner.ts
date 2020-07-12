@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import * as Builder from "ts-webpack-builder";
-import * as path from "path";
+import * as Builder from 'ts-webpack-builder';
+import * as path from 'path';
 
 /*
 	This file is called with arguments from package.json.
@@ -15,7 +15,7 @@ import * as path from "path";
 
 // Get the first arg (Passed in if -- is used to separate)
 let configName = process.argv[2] || null;
-const root = path.resolve(__dirname, "../");
+const root = path.resolve(__dirname, '../');
 
 if (configName) {
 	// Test using the findConfig.

@@ -1,3 +1,3 @@
-import { introduceSelf } from "../dist/index";
+import { introduceSelf } from '../dist/index';
 
-console.log(introduceSelf("World"));
+console.log(introduceSelf('World'));

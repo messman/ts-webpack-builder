@@ -1,4 +1,4 @@
-import { failWith } from "./fail";
+import { failWith } from './fail';
 /*
 	This is a build tool that uses webpack to build other projects.
 	But, it's also a project that is itself built with webpack.
@@ -10,7 +10,7 @@ import { failWith } from "./fail";
 
 declare function __webpack_require__(entityPath: string): {};
 declare function __non_webpack_require__(entityPath: string): {};
-const requireFunc = typeof __webpack_require__ === "function" ? __non_webpack_require__ : require;
+const requireFunc = typeof __webpack_require__ === 'function' ? __non_webpack_require__ : require;
 
 export function runtimeRequire(entityPath: string): {} {
 	let entity = {};

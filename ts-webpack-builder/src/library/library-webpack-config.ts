@@ -81,10 +81,6 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 		modules: ['node_modules', rootDir]
 	};
 
-	// config.externals = {
-	// 	luxon: 'luxon'
-	// };
-
 	// https://webpack.js.org/configuration/module/
 
 	let typeScriptLoaders: {}[] = [

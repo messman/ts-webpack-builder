@@ -8,10 +8,10 @@
 		"runner": "tsc --p run/tsconfig.json",
 		"start": "node run/runner.js",
 		"start-cli": "ts-webpack-builder",
-		"test": "tsc --p test/tsconfig.json && node test/index.js"
+		"test": "npm run runner && node test/index.js"
 	},
 	"author": "Andrew Messier",
-	"license": "UNLICENSED",
+	"license": "MIT",
 	"dependencies": {},
 	"devDependencies": {
 		"@types/node": "^13.11.1",

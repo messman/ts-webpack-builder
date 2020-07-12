@@ -1,6 +1,6 @@
 {
 	"name": "ts-webpack-builder",
-	"version": "1.3.0",
+	"version": "1.4.0",
 	"description": "A tool for building TypeScript libraries and applications.",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -9,8 +9,8 @@
 	},
 	"scripts": {
 		"build": "webpack",
-		"build:cli": "tsc --p cli/tsconfig.json",
-		"start": "webpack && tsc --p cli/tsconfig.json"
+		"build-cli": "tsc --p cli/tsconfig.json",
+		"start": "npm run build && npm run build-cli"
 	},
 	"author": "Andrew Messier",
 	"license": "UNLICENSED",
