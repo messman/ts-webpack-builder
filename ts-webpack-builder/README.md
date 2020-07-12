@@ -4,6 +4,10 @@ An npm package used to build other npm packages or via TypeScript and webpack.
 
 **Note:** This project is not intended for outside use.
 
+`npm install --save-dev @messman/ts-webpack-builder`
+
+View on [npm](https://www.npmjs.com/package/@messman/ts-webpack-builder)
+
 ## Why?
 
 Why use webpack to create libraries? You could just use a `tsconfig.json` file and be done with it. But the problems with that include:
