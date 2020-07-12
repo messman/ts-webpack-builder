@@ -11,7 +11,7 @@ import * as yargs from 'yargs';
 import { LibraryBuildOptions, buildLibrary } from '../dist/index';
 
 interface ParsedBuildOptions extends Omit<LibraryBuildOptions, 'absoluteRoot' | 'babelConfig'> {
-	babelConfigPath: string
+	babelConfigPath: string;
 }
 
 function parseArgs(): ParsedBuildOptions {
@@ -72,7 +72,6 @@ function main(): void {
 		babelConfig: babelConfig
 	};
 
-	// TODO: only libraries are done this way right now. Could include applications later.
 	buildLibrary(opts);
 }
 
