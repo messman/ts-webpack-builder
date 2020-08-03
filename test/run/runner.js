@@ -1,7 +1,8 @@
 #!/usr/bin/env node
+//@ts-check
 
-import * as Builder from 'ts-webpack-builder';
-import * as path from 'path';
+const webpackBuilder = require('@messman/ts-webpack-builder');
+const path = require('path');
 
 /*
 	This file is called with arguments from package.json.
@@ -19,25 +20,25 @@ const root = path.resolve(__dirname, '../');
 
 if (configName) {
 	// Test using the findConfig.
-	const config = Builder.findConfig(configName, {
+	const config = webpackBuilder.findConfig(configName, {
 		// Test using a library name.
-		'build:once': Builder.createNodeLibraryConfig(root, 'tsWebpackBuilderTest'),
+		'build:once': webpackBuilder.createNodeLibraryConfig(root, 'tsWebpackBuilderTest'),
 		// Test using watch.
 		'build:watch': {
-			...Builder.createNodeLibraryConfig(root, 'tsWebpackBuilderTest'),
+			...webpackBuilder.createNodeLibraryConfig(root, 'tsWebpackBuilderTest'),
 			watch: true
 		},
 		// Test building a client library.
 		'build:client': {
-			...Builder.createClientLibraryConfig(root, 'tsWebpackBuilderTest'),
+			...webpackBuilder.createClientLibraryConfig(root, 'tsWebpackBuilderTest'),
 			babelConfig: null
 		},
 	});
-	Builder.buildLibrary(config);
+	webpackBuilder.buildLibrary(config);
 }
 else {
 	// Test using the regular object input.
-	Builder.buildLibrary({
+	webpackBuilder.buildLibrary({
 		absoluteRoot: root
 	});
 }

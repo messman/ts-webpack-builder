@@ -5,10 +5,10 @@
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
-		"runner": "tsc --p run/tsconfig.json",
+		"link": "npm link @messman/ts-webpack-builder",
 		"start": "node run/runner.js",
 		"start-cli": "ts-webpack-builder",
-		"test": "npm run runner && node test/index.js"
+		"test": "node test/index.js"
 	},
 	"author": "Andrew Messier",
 	"license": "MIT",
