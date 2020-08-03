@@ -17,9 +17,6 @@ export function createClientLibraryConfig(absoluteRoot: string, name: string): L
 		...defaultLibraryBuildOptions,
 		absoluteRoot: absoluteRoot,
 		libraryName: name,
-		isNode: false,
-		babelConfig: {
-			presets: ['@babel/preset-env'] // requires consumer to have this installed.
-		}
+		isNode: false
 	};
 }

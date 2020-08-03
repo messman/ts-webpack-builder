@@ -8,11 +8,15 @@
 import * as path from 'path';
 import * as yargs from 'yargs';
 
-import { LibraryBuildOptions, buildLibrary } from '../dist/index';
+import { LibraryBuildOptions, buildLibrary, findConfig } from '../dist/index';
 
-interface ParsedBuildOptions extends Omit<LibraryBuildOptions, 'absoluteRoot' | 'babelConfig'> {
+interface ParsedBuildOptions extends Omit<LibraryBuildOptions, 'absoluteRoot' | 'babelConfig' | 'rootAlias' | 'webpackConfigTransform'> {
 	babelConfigPath: string;
+	configFile: string;
+	configFileKey: string;
 }
+
+const defaultConfigFile = 'tswb.js';
 
 function parseArgs(): ParsedBuildOptions {
 	// https://github.com/yargs/yargs-parser
@@ -51,6 +55,15 @@ function parseArgs(): ParsedBuildOptions {
 		.option('isDevelopmentForDebug', {
 			type: 'boolean',
 		})
+		.option('configFile', {
+			type: 'string',
+			default: defaultConfigFile,
+			description: 'Configuration file for this tool, similar to webpack.config.js or tsconfig.json. File can return an object or function.'
+		})
+		.option('configFileKey', {
+			type: 'string',
+			description: 'Key to use in the dictionary returned from the configuration file, to support multiple configurations.'
+		})
 		.strict()
 		.argv as ParsedBuildOptions;
 }
@@ -60,17 +73,38 @@ function main(): void {
 	const args = parseArgs();
 	const workingDirectory = process.cwd();
 
-	// Load the babel config as a JSON config. (TODO: this is untested.)
-	let babelConfig: {} | null = null;
-	if (args.babelConfigPath) {
-		babelConfig = require(path.resolve(workingDirectory, args.babelConfigPath));
+	// Check for a configuration file.
+	let fileConfig: Partial<LibraryBuildOptions> = {};
+	if (args.configFile) {
+		try {
+			fileConfig = require(path.resolve(workingDirectory, args.configFile));
+			if (fileConfig instanceof Function) {
+				fileConfig = fileConfig();
+			}
+
+			// If we have a key, assume the object we now have is actually a dictionary of multiple configurations.
+			if (args.configFileKey) {
+				const dictionary = fileConfig as unknown as { [key: string]: LibraryBuildOptions; };
+				fileConfig = findConfig(args.configFileKey, dictionary);
+			}
+		}
+		catch (e) {
+			if (args.configFile !== defaultConfigFile) {
+				console.error(`Could not locate or load file '${args.configFile}' as argument to 'configFile'`, e);
+			}
+		}
 	}
 
-	const opts: LibraryBuildOptions = {
-		...args,
-		absoluteRoot: workingDirectory,
-		babelConfig: babelConfig
-	};
+	// Construct our options from the file first, then any modifiers from the command line args.
+	const opts: Partial<LibraryBuildOptions> = { ...fileConfig, ...args };
+
+	// Perhaps our absolute root has already been specified... not sure why it would be, but use it if it is.
+	opts.absoluteRoot = opts.absoluteRoot || workingDirectory;
+
+	// Load the babel config as a JSON config. (TODO: this is untested.)
+	if (args.babelConfigPath) {
+		opts.babelConfig = require(path.resolve(opts.absoluteRoot, args.babelConfigPath));
+	}
 
 	buildLibrary(opts);
 }

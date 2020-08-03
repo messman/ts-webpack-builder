@@ -3,6 +3,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import * as nodeExternals from 'webpack-node-externals';
 import { LibraryBuildOptions } from './library-config';
 import { Configuration } from "webpack";
+import { logDebug } from '../util/log';
 
 /*
 	References:
@@ -17,7 +18,7 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 
 	const isForDebug = options.isDevelopment && options.isDevelopmentForDebug;
 
-	const config: Configuration = {};
+	let config: Configuration = {};
 
 	// https://webpack.js.org/configuration/mode/
 	config.mode = options.isDevelopment ? 'development' : 'production';
@@ -75,6 +76,17 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 		extensions: ['.ts', '.js', '.json']
 	};
 
+	// https://webpack.js.org/configuration/resolve/#resolvealias
+	const rootAlias = options.rootAlias;
+	if (rootAlias && rootAlias.length === 2) {
+		const [symbol, mapping] = rootAlias;
+
+		// Default option: '@' maps to [root]/src
+		config.resolve.alias = {
+			[symbol]: path.resolve(options.absoluteRoot, mapping),
+		};
+	}
+
 	// help webpack find the `ts-loader` that is part of this project
 	// https://webpack.js.org/configuration/resolve/#resolveloader
 	config.resolveLoader = {
@@ -114,6 +126,12 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 		// Clean the "dist" folder each time
 		new CleanWebpackPlugin()
 	];
+
+	// Now, if set, allow for transformations
+	if (options.webpackConfigTransform) {
+		logDebug(options.isDebug, 'Executing webpackConfigTransform function');
+		config = options.webpackConfigTransform(config, options);
+	}
 
 	return config;
 }

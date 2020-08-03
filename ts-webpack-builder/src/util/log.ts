@@ -1,3 +1,4 @@
+// Note - we require this during build time, so if the version of this package is changed without building then this value will not be updated.
 const packageJson = require('../../package.json');
 
 const prefix = `[tswb] `;

@@ -2,7 +2,7 @@
 
 An npm package used to build other npm packages or via TypeScript and webpack. 
 
-**Note:** This project is not intended for outside use.
+**Note:** This project is not intended for use by anyone other than the creator.
 
 `npm install --save-dev @messman/ts-webpack-builder`
 
@@ -35,10 +35,10 @@ Build with `npm start`. That runs the webpack build (meta, right) to create this
 
 To use in a project, you can install (dev) or use `npm link`:
 - In the root of this downloaded source, run `npm link`. That installs this package in the npm global space for this machine.
-- In the project you want to use, run `npm link ts-webpack-builder`. That finds the global installation and binds it into that project. 
+- In the project you want to use, run `npm link @messman/ts-webpack-builder`. That finds the global installation and binds it into that project. 
 Note, the `ts-webpack-builder` won't show up in the `package.json` dependencies. That's just not how `npm link` works. But it will show up in `node_modules` (symlink).
 
-Once this tool is added to the consuming project, you can either create a script in that project to call into this tool (like a `runner.ts`) or you can use the CLI.
+Once this tool is added to the consuming project, you can either create a script in that project to call into this tool (like a `runner.js`) or you can use the CLI.
 See the `test` folder for more information on both. The CLI should be improved in the future to be more customizable / have better shortcuts.
 
 In your package.json, to create a usable library:
@@ -57,7 +57,7 @@ In order to resolve packages in the `node_modules` directory when using module i
 
 The CLI exists in the `cli` folder. It is built separately from the rest of the code in `src` and is actually bound to the built code in `dist` folder (so that it only uses the types and doesn't try to transpile anything in `src` - that's also why it doesn't get put into `dist` after transpilation).
 
-When installed in the target project, the CLI is accessible at `./node_modules/.bin/ts-webpack-builder`. You can run it like that or call `npx ts-webpack-builder`. Or you can set up a custom command through `package.json`:
+When installed in the target project, the CLI is accessible at `./node_modules/.bin/@messman/ts-webpack-builder`. You can run it like that or call `npx ts-webpack-builder`. Or you can set up a custom command through `package.json`:
 
 ```json
 {
@@ -68,13 +68,18 @@ When installed in the target project, the CLI is accessible at `./node_modules/.
 ```
 You can pass in any arguments there as well.
 
-The CLI does not require you to pass in an `absoluteRoot` property. It can use a babel config file.
+Notes on the CLI:
+- The CLI does not require you to pass in an `absoluteRoot` property. 
+- There is a CLI options to specify a path to a babel config file.
+- The CLI will automatically look for a file in your project called `tswb.js` that can contain build options. This file can specify one object of build options or a dictionary.
+
+See the test area for examples.
 
 ## Development
 
 Typical steps are:
 - Make a change, save, then call `npm start` in the root of this project to do the webpack build and the CLI build.
-- `cd test` to go into the test.
+- `cd ../test` to go into the test.
 - Run the tests (see the `test` README)
 
 There are some times where you may need to delete the `ts-webpack-builder` folder in `node_modules` in `test`, then re-link, like after you've installed something new.

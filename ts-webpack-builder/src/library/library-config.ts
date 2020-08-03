@@ -1,4 +1,5 @@
 import { BaseBuildOptions, defaultBaseBuildOptions } from "../config";
+import { Configuration } from 'webpack';
 
 export interface LibraryBuildOptions extends BaseBuildOptions {
 	/**
@@ -13,7 +14,7 @@ export interface LibraryBuildOptions extends BaseBuildOptions {
 	isNode: boolean,
 	/**
 	 * Whether to exclude node_modules from the build output.
-	 * If false, your build output has everything it needs.
+	 * If false, your build output has everything it needs (dependencies bundled in).
 	 * If true, your build output is going to be used in a future build that will apply the node_modules.
 	 * Libraries will likely exclude the node_modules.
 	 * Default: true
@@ -56,7 +57,22 @@ export interface LibraryBuildOptions extends BaseBuildOptions {
 	 * Only used when in development mode.
 	 * Default: false
 	 */
-	isDevelopmentForDebug: boolean
+	isDevelopmentForDebug: boolean;
+	/**
+	 * If set to a tuple, adds an alias entry into the webpack configuration to support importing with that alias.
+	 * Also requires configuration setup in the consuming project's tsconfig.json.
+	 * Not accessible through the CLI.
+	 * First tuple argument is the alias, second tuple argument is the directory relative to the project root that the alias applies to.
+	 * Example: ['@', './src'] becomes '@': path.resolve(__dirname, './src') and requires a tsconfig.json setting of "paths": { "@/*": [ "src/*" ] }
+	 * Default: ['@', './src']
+	 */
+	rootAlias: [string, string] | null;
+	/**
+	 * If set to a function, provides the current webpack configuration to the function for full customization.
+	 * Not accessible through the CLI.
+	 * Default: null
+	 */
+	webpackConfigTransform: ((config: Configuration, buildOptions: LibraryBuildOptions) => Configuration) | null;
 }
 
 export const defaultLibraryBuildOptions: LibraryBuildOptions = {
@@ -70,5 +86,7 @@ export const defaultLibraryBuildOptions: LibraryBuildOptions = {
 	libraryName: undefined!,
 	babelConfig: null,
 	isDebug: false,
-	isDevelopmentForDebug: false
-}
+	isDevelopmentForDebug: false,
+	rootAlias: ['@', './src'],
+	webpackConfigTransform: null
+};

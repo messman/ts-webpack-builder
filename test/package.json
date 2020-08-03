@@ -6,9 +6,15 @@
 	"types": "dist/index.d.ts",
 	"scripts": {
 		"link": "npm link @messman/ts-webpack-builder",
-		"start": "node run/runner.js",
-		"start-cli": "ts-webpack-builder",
-		"test": "node test/index.js"
+		"test-runner": "node run/runner.js",
+		"test-cli": "ts-webpack-builder",
+		"test-cli-log": "ts-webpack-builder --isDebug=true",
+		"test-cli-bad-config-file": "ts-webpack-builder --configFile=nonexistent.js",
+		"test-cli-multi": "ts-webpack-builder --configFile=tswb.multi.js",
+		"test-cli-multi-one": "ts-webpack-builder --configFile=tswb.multi.js --configFileKey=one",
+		"test-cli-multi-two": "ts-webpack-builder --configFile=tswb.multi.js --configFileKey=two",
+		"test-cli-multi-three": "ts-webpack-builder --configFile=tswb.multi.js --configFileKey=three",
+		"verify-output": "node test/index.js"
 	},
 	"author": "Andrew Messier",
 	"license": "MIT",
