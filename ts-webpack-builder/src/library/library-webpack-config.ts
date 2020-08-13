@@ -73,7 +73,7 @@ export function createWebpackConfig(options: LibraryBuildOptions): Configuration
 
 	// https://webpack.js.org/configuration/resolve/
 	config.resolve = {
-		extensions: ['.ts', '.js', '.json']
+		extensions: ['.ts', '.tsx', '.js', '.json']
 	};
 
 	// https://webpack.js.org/configuration/resolve/#resolvealias
