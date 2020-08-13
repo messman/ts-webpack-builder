@@ -6,7 +6,7 @@ An npm package used to build other npm packages or via TypeScript and webpack.
 
 `npm install --save-dev @messman/ts-webpack-builder`
 
-View on [npm](https://www.npmjs.com/package/@messman/ts-webpack-builder)
+View on [npm](https://www.npmjs.com/package/@messman/ts-webpack-builder) or on [GitHub](https://github.com/messman/ts-webpack-builder).
 
 ## Why?
 
