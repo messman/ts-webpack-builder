@@ -10,7 +10,8 @@ export interface BaseBuildOptions {
 	 */
 	absoluteRoot: string,
 	/**
-	 * Whether the project is running in dev mode.
+	 * Whether the target project is running in dev mode.
+	 * 
 	 * Default: true
 	 */
 	isDevelopment: boolean;

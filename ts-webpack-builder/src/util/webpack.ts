@@ -8,7 +8,7 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 
 	return new Promise((resolve, reject) => {
 
-		function callback(error: Error, stats: webpack.Stats) {
+		function callback(error: Error | undefined, stats: webpack.Stats | undefined) {
 			// Let us know if this was the initial build or new build.
 			const wasFirst = isFirst;
 			isFirst = false;
@@ -51,18 +51,22 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 	});
 }
 
-function processWebpackBuild(error: Error, stats: webpack.Stats, wasFirst: boolean): void {
+function processWebpackBuild(error: Error | undefined, stats: webpack.Stats | undefined, wasFirst: boolean): void {
 	// Show webpack errors (larger configuration issues)
 	if (error) {
 		logError(error.stack || error);
 		throw new Error('Webpack compilation failed - major error');
+	}
+	if (!stats) {
+		log('No stats available to print');
+		return;
 	}
 
 	// Show statistics.
 	// https://webpack.js.org/configuration/stats/
 	console.log(stats.toString({
 		assets: true,
-		excludeAssets: (assetName) => {
+		excludeAssets: (assetName: string) => {
 			return assetName.endsWith('.d.ts') || assetName.endsWith('.d.ts.map');
 		},
 		builtAt: true,

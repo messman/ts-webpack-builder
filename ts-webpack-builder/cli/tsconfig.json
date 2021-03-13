@@ -5,7 +5,8 @@
 		"sourceMap": false,
 		"declaration": false,
 		"declarationMap": false,
-		"incremental": false
+		"incremental": false,
+		"skipLibCheck": true
 	},
 	"files": [
 		"./cli.ts"

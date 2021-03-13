@@ -110,3 +110,7 @@ Many hours have been spent researching the possibilities of combining declaratio
 - use one of the solutions out there (like `dts-bundle-generator`) that comes with caveats
 
 Why's it so difficult? When webpack combines into a single output file, it's because it's essentially wrapping the entire JS module environment. That's just not possible with declarations, which are more static. So the problems you run into include, for example, you wouldn't be able to name any types the same, because they will be flattened and override each other. Then on top of that, you wouldn't be able to handle the `.map` files that allow you to go directly to the source!
+
+## History
+
+- 2.0.0: Upgrade to Webpack v5

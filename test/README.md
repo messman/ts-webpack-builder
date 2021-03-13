@@ -13,13 +13,13 @@ All the tests:
 
 ```bash
 # Run from API with runner.js, with no arg (does default from runner.js)
-npm run test-runner
+npm run test
 
 # Run from API with runner, using a config name provided in runner (same result)
-npm run test-runner -- build:once
+npm run test -- build:once
 
 # Run from API with runner, using the watch config name
-npm run test-runner -- build:watch
+npm run test -- build:watch
 
 # Run from CLI without relying on package.json scripts
 npx ts-webpack-builder
@@ -51,7 +51,7 @@ npm run test-cli-multi-three
 
 After each, you can run
 ```bash
-npm run verify-output
+npm run verify
 ```
 
 To run the test, which should just print to console.

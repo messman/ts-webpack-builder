@@ -8,7 +8,7 @@
 import * as path from 'path';
 import * as yargs from 'yargs';
 
-import { LibraryBuildOptions, buildLibrary, findConfig } from '../dist/index';
+import { LibraryBuildOptions, buildLibrary, findConfig, log, logError } from '../dist/index';
 
 interface ParsedBuildOptions extends Omit<LibraryBuildOptions, 'absoluteRoot' | 'babelConfig' | 'rootAlias' | 'webpackConfigTransform'> {
 	babelConfigPath: string;
@@ -76,21 +76,37 @@ function main(): void {
 	// Check for a configuration file.
 	let fileConfig: Partial<LibraryBuildOptions> = {};
 	if (args.configFile) {
+		let fullConfigPath = '';
 		try {
-			fileConfig = require(path.resolve(workingDirectory, args.configFile));
+			fullConfigPath = path.resolve(workingDirectory, args.configFile);
+			fileConfig = require(fullConfigPath);
+			let isConfigAFunction = false;
 			if (fileConfig instanceof Function) {
+				isConfigAFunction = true;
 				fileConfig = fileConfig();
 			}
+			log(`Resolved '${args.configFile}' to a configuration ${isConfigAFunction ? 'function' : 'object'}`);
 
 			// If we have a key, assume the object we now have is actually a dictionary of multiple configurations.
 			if (args.configFileKey) {
 				const dictionary = fileConfig as unknown as { [key: string]: LibraryBuildOptions; };
 				fileConfig = findConfig(args.configFileKey, dictionary);
 			}
+			// For debug purposes, print out the keys of this config object.
+			const keys = Object.keys(fileConfig);
+			log(`Keys of configuration object (${keys.length}): ${keys.join(', ')}`);
 		}
 		catch (e) {
 			if (args.configFile !== defaultConfigFile) {
-				console.error(`Could not locate or load file '${args.configFile}' as argument to 'configFile'`, e);
+				logError(`Could not locate or load file '${args.configFile}' as argument to 'configFile'`);
+				if (fullConfigPath) {
+					logError(`Full attempted path: '${fullConfigPath}'`);
+				}
+				// In this case, throw.
+				throw e;
+			}
+			else {
+				log(`Did not find or could not load '${defaultConfigFile}' configuration file`);
 			}
 		}
 	}
@@ -112,6 +128,6 @@ function main(): void {
 try {
 	main();
 } catch (e) {
-	console.error('Error during execution:', e);
+	logError('Error during execution:', e);
 	process.exit(1);
 }

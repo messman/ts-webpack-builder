@@ -33,7 +33,7 @@ module.exports = {
 			{
 				test: /\.ts?$/,
 				exclude: /[\\/]node_modules[\\/]/,
-				loaders: ['ts-loader']
+				use: ['ts-loader']
 			},
 		]
 	},
