@@ -5,6 +5,7 @@ import { logError, log, logLine } from './log';
 export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 
 	let isFirst = true;
+	log('Webpack version: ' + webpack.version);
 
 	return new Promise((resolve, reject) => {
 

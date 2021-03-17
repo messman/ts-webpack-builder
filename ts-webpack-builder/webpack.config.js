@@ -5,7 +5,7 @@ const nodeExternals = require('webpack-node-externals');
 // This config is very similar to the one created in code in src - check there for more info.
 
 module.exports = {
-	mode: 'development',
+	mode: 'production',
 	target: 'node',
 
 	context: __dirname,
