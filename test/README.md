@@ -16,10 +16,16 @@ All the tests:
 npm run test
 
 # Run from API with runner, using a config name provided in runner (same result)
-npm run test -- build:once
+npm run test -- build once
+
+# Run from API with runner, using a config name provided in runner, to just get the configs
+npm run test -- config once
 
 # Run from API with runner, using the watch config name
-npm run test -- build:watch
+npm run test -- build watch
+
+# Run from API with runner, using the watch config name, to just get the configs
+npm run test -- config watch
 
 # Run from CLI without relying on package.json scripts
 npx ts-webpack-builder

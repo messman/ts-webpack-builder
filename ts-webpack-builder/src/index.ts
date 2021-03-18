@@ -4,7 +4,7 @@
 
 export { BaseBuildOptions, findConfig } from './config';
 
-export { buildLibrary } from './library/build-library';
+export { buildLibrary, constructConfigs } from './library/build-library';
 export * from './library/library-config';
 export * from './library/build-library-helpers';
 // For the CLI

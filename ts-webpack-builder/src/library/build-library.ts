@@ -5,6 +5,7 @@ import { failWith } from '../util/fail';
 import { logVersion, log, logDebug, logLine } from '../util/log';
 import * as path from 'path';
 import { runtimeRequire } from '../util/dynamic-require';
+import { Configuration } from 'webpack';
 
 /** Builds a library using the provided config. */
 export function buildLibrary(config: Partial<LibraryBuildOptions>): void {
@@ -13,14 +14,7 @@ export function buildLibrary(config: Partial<LibraryBuildOptions>): void {
 	logLine();
 	log('Starting new library build');
 
-	// Fill in with defaults.
-	const fullConfig: LibraryBuildOptions = { ...defaultLibraryBuildOptions, ...config };
-
-	logDebug(fullConfig.isDebug, 'resolved config:', fullConfig);
-
-	const webpackConfig = createWebpackConfig(fullConfig);
-
-	logDebug(fullConfig.isDebug, 'webpack config:', webpackConfig);
+	const [fullConfig, webpackConfig] = constructConfigs(config);
 
 	// Try to output the information in the package.json of the target/consuming project
 	try {
@@ -37,4 +31,19 @@ export function buildLibrary(config: Partial<LibraryBuildOptions>): void {
 		.catch((e) => {
 			failWith(e);
 		});
+}
+
+/** Returns a tuple of [fully-resolved config, webpack config] that would be used for the build. */
+export function constructConfigs(config: Partial<LibraryBuildOptions>): [LibraryBuildOptions, Configuration] {
+
+	// Fill in with defaults.
+	const fullConfig: LibraryBuildOptions = { ...defaultLibraryBuildOptions, ...config };
+
+	logDebug(fullConfig.isDebug, 'resolved config:', fullConfig);
+
+	const webpackConfig = createWebpackConfig(fullConfig);
+
+	logDebug(fullConfig.isDebug, 'webpack config:', webpackConfig);
+
+	return [fullConfig, webpackConfig];
 }
