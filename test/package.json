@@ -17,10 +17,9 @@
 	},
 	"author": "Andrew Messier",
 	"license": "MIT",
-	"dependencies": {},
 	"devDependencies": {
 		"@messman/ts-webpack-builder": "file:../ts-webpack-builder",
-		"@types/node": "^13.13.46",
-		"typescript": "^3.9.9"
+		"@types/node": "^18.6.4",
+		"typescript": "^4.7.4"
 	}
 }

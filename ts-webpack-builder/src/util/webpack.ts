@@ -9,7 +9,7 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 
 	return new Promise((resolve, reject) => {
 
-		function callback(error: Error | undefined, stats: webpack.Stats | undefined) {
+		function callback(error: Error | null | undefined, stats: webpack.Stats | undefined) {
 			// Let us know if this was the initial build or new build.
 			const wasFirst = isFirst;
 			isFirst = false;
@@ -52,7 +52,7 @@ export function runWebpack(webpackConfig: {}, watch: boolean): Promise<void> {
 	});
 }
 
-function processWebpackBuild(error: Error | undefined, stats: webpack.Stats | undefined, wasFirst: boolean): void {
+function processWebpackBuild(error: Error | null | undefined, stats: webpack.Stats | undefined, wasFirst: boolean): void {
 	// Show webpack errors (larger configuration issues)
 	if (error) {
 		logError(error.stack || error);

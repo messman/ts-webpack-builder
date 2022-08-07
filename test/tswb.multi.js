@@ -6,10 +6,10 @@
 /**
  * @type { LibraryBuildOptions['webpackConfigTransform'] }
  */
-function configTransform(webpackConfig) {
+const configTransform = (webpackConfig) => {
 	console.log('Testing from tswb.multi.js');
 	return webpackConfig;
-}
+};
 
 /**
  * @type {{ [key: string]: Partial<LibraryBuildOptions> }}
